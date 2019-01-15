@@ -1,11 +1,18 @@
 language: cpp
 sudo: required
 dist: trusty
-
 addons:
-  apt:
-    packages: lcov
-
+    apt:
+        sources:
+          # add PPAs with more up-to-date toolchains
+          - ubuntu-toolchain-r-test
+          - llvm-toolchain-precise-3.6
+        packages:
+          # install toolchains
+          - gcc-5
+          - g++-5
+          - clang-3.6
+          - lcov
 env:
   - CODECOV_TOKEN="f9bb29da-ad96-4925-b0a9-621a82135e73"
 
@@ -46,14 +53,14 @@ matrix:
             - clang-3.7
       env: COMPILER=clang++-3.7
 
-
+install:
+  - sudo apt-get install lcov
 
 
 script:
   - mkdir build
   - cd build
   - cmake -DCODE_COVERAGE=ON ..
-  - cmake --build . --config Debug -- -j $(nproc)
   - make
   - ctest --output-on-failure
 
