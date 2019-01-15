@@ -12,6 +12,9 @@ addons:
           - gcc-5
           - g++-5
           - clang-3.6
+          - lcov
+env:
+  - CODECOV_TOKEN="f9bb29da-ad96-4925-b0a9-621a82135e73"
 
 matrix:
   include:
@@ -66,6 +69,15 @@ install:
 script:
   - mkdir build
   - cd build
-  - cmake ..
+  - cmake -DCODE_COVERAGE=ON ..
   - make
-  - make test
+  - ctest --output-on-failure
+
+
+after_success:
+  # Create lcov report
+  - lcov --capture --directory . --output-file coverage.info
+  - lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter system-files
+  - lcov --list coverage.info
+    # Uploading to CodeCov
+  - bash <(curl -s https://codecov.io/bash) -f coverage.info || echo "Codecov did not collect coverage reports"
