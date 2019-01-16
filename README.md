@@ -6,18 +6,25 @@
 
 This example is to demonstrate how to organise a project on Github 
 
-1. Using Git to version control your code
-  * git checkout 
-  * git log
-  * continious integration
 
+## Version control
 
-2. Github as a collaboration platform
-  * private & public repository
-  * branching
-  * pull request
-  * issue tracker
-  * Don't submit data. (use .gitignore)
+* git diff/add/commit/push/log
+* git checkout
+* branching & pull request
+* Continuous integration
+
+## Collaboration
+
+* private & public repository
+* branching & pull request
+* issue tracker
+* Don't submit data. (use .gitignore)
+* slack channel
+* analysis repo and software tools.
+  * Stable branch
+  * development branch
+
 
 
 ![Inspiration](https://i.imgur.com/3POtveC.jpg)
